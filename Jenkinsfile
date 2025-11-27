@@ -1,12 +1,11 @@
 pipeline {
-    agent any
+    agent {label 'production'}
     
-    tools {nodejs "nodejs 18.16.0"}
 
     stages {
         stage('Checkout SCM') {
             steps {
-                git branch: 'dev', url: 'https://github.com/IDN-Training/simple-apps.git'
+                git branch: 'main', url: 'https://github.com/arwindjoko/simple-apps.git'
             }
         }
         stage('Build') {
@@ -26,10 +25,10 @@ pipeline {
             steps {
                 sh '''cd apps
                 sonar-scanner \
-                -Dsonar.projectKey=Test-Apps \
+                -Dsonar.projectKey=simple-apps \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=http://10.23.0.11:9000 \
-                -Dsonar.login=sqp_453c0e4301afd70ecdf1719a4e66bd5e2ceb78c6'''
+                -Dsonar.host.url=http://172.23.12.113:9000 \
+                -Dsonar.login=sqp_7eee83541266c589f2aa1f0ae7f2d0fadf29cbab'''
             }
         }
         stage('Deploy compose') {
