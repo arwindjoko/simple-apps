@@ -1,11 +1,9 @@
 pipeline {
     agent {label 'production'}
-    
-
     stages {
         stage('Checkout SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/arwindjoko/simple-apps.git'
+                git branch: 'dev', url: 'https://github.com/arwindjoko/simple-apps.git'
             }
         }
         stage('Build') {
